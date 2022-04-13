@@ -3,7 +3,7 @@ import typeDefs from "./grphql/typeDefs.js";
 import resolvers from "./grphql/resolvers.js";
 import createDb from "./mongo/createDb.js";
 
-createDb();
+await createDb();
 
 const server = new ApolloServer({
 	typeDefs,

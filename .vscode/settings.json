@@ -1,10 +1,19 @@
 {
 	"cSpell.ignoreWords": [
+		"Fiction",
+		"Historical",
 		"ISBN",
+		"Literature",
+		"Mystery",
+		"Publishers",
+		"Realist",
+		"Science",
 		"apollo",
 		"authors",
 		"genres",
 		"grphql",
+		"past",
+		"populate",
 		"publication",
 		"publisher"
 	]

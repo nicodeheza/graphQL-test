@@ -1,9 +1,9 @@
 import mongoose from "mongoose";
 
 const publisherSchema = new mongoose.Schema({
-	name: {type: String, required: true},
+	name: {type: String, required: true, unique: true},
 	foundationYear: Number,
-	books: {type: mongoose.Schema.Types.ObjectId, ref: "Book"}
+	books: [{type: mongoose.Schema.Types.ObjectId, ref: "Book"}]
 });
 
 const Publisher = mongoose.model("Publisher", publisherSchema);
