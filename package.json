@@ -1,0 +1,23 @@
+{
+  "name": "app",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-server": "^3.6.7",
+    "graphql": "^16.3.0",
+    "mongodb-memory-server-core": "^8.4.2",
+    "mongoose": "^6.2.11"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
