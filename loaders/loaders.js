@@ -8,7 +8,6 @@ const loaders = {
 		return Book.find({_id: {$in: ids}});
 	}),
 	authorsLoader: new DataLoader((ids) => {
-		console.log(ids);
 		return Author.find({_id: {$in: ids}});
 	}),
 	publishersLoader: new DataLoader((ids) => {

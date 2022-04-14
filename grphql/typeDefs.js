@@ -8,15 +8,16 @@ const typeDefs = gql`
 		getAllPublishers: [Publisher]
 		getPublisherById(id: ID!): Publisher
 		getBookById(id: ID!): Book
-		# getAllBooks(
-		# 	limit: Int
-		# 	offset: Int
-		# 	title: String
-		# 	author: String
-		# 	publisher: String
-		# 	year: Int
-		# 	sort: Order
-		# ): [Book]
+		getAllBooks(
+			limit: Int
+			offset: Int
+			title: String
+			author: String
+			publisher: String
+			year: Int
+			sortByTitle: Order
+			sortByYear: Order
+		): [Book]
 	}
 	# type Mutation {
 	# 	createNewBook(
