@@ -12,7 +12,8 @@ const server = new ApolloServer({
 	context: async ({req}) => {
 		return {
 			booksLoader: loaders.booksLoader,
-			authorLoader: loaders.authorsLoader
+			authorsLoader: loaders.authorsLoader,
+			publisherLoader: loaders.publishersLoader
 		};
 	}
 });

@@ -6,8 +6,8 @@ const typeDefs = gql`
 		getAllAuthors: [Author]
 		getAuthorById(id: ID!): Author
 		getAllPublishers: [Publisher]
-		# getPublisherById(id: ID!): Publisher
-		# getBookById(id: ID!): Book
+		getPublisherById(id: ID!): Publisher
+		getBookById(id: ID!): Book
 		# getAllBooks(
 		# 	limit: Int
 		# 	offset: Int

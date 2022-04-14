@@ -17,6 +17,7 @@ export default async function createDb() {
 		console.log("Creating db records...");
 		await populateDb(100);
 		console.log("Records created");
+		console.log(await Book.find({}).limit(1).exec());
 	} catch (err) {
 		console.log(err);
 	}

@@ -17,7 +17,7 @@ const resolvers = {
 		},
 		getAuthorById: async (parent, args, ctx) => {
 			try {
-				return await ctx.authorLoader.load(args.id);
+				return await ctx.authorsLoader.load(args.id);
 			} catch (err) {
 				console.log(err);
 			}
@@ -28,6 +28,20 @@ const resolvers = {
 			} catch (err) {
 				console.log(err);
 			}
+		},
+		getPublisherById: async (parent, args, ctx) => {
+			try {
+				return await ctx.publisherLoader.load(args.id);
+			} catch (err) {
+				console.log(err);
+			}
+		},
+		getBookById: async (parent, args, ctx) => {
+			try {
+				return await ctx.booksLoader.load(args.id);
+			} catch (err) {
+				console.log(err);
+			}
 		}
 	},
 	Author: {
@@ -35,6 +49,14 @@ const resolvers = {
 	},
 	Publisher: {
 		books: bookField
+	},
+	Book: {
+		authors: async (parent, args, ctx) => {
+			return await ctx.authorsLoader.loadMany(parent.authors.map((o) => o.toString()));
+		},
+		publisher: async (parent, args, ctx) => {
+			return await ctx.publisherLoader.load(parent.publisher.toString());
+		}
 	}
 };
 
