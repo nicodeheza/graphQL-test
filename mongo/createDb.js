@@ -27,7 +27,7 @@ async function populateDb(numOfBook) {
 		const arrOfAuthors = [];
 		let arrOfPublishers = [];
 		let arrOfBooks = [];
-		for (let i = 0; i < numOfBook / 2; i++) {
+		for (let i = 0; i < numOfBook / 1.5; i++) {
 			const newAuthor = {
 				firstName: faker.name.findName(),
 				lastName: faker.name.lastName(),
@@ -53,46 +53,43 @@ async function populateDb(numOfBook) {
 					Math.floor(Math.random() * 5) + 1
 				),
 				publicationYear: new Date(faker.date.past(100)).getFullYear(),
-				authors: getRandomIds(
+				authors: getAuthorsIds(
 					authors.map((e) => e._id),
-					Math.floor(Math.random() * 4) + 1
+					Math.floor(Math.random() * 3) + 1
 				),
-				publisher: getRandomIds(
-					publisher.map((e) => e._id),
-					1
-				)
+				publisher: getPublisherIds(publisher.map((e) => e._id))
 			};
 
 			arrOfBooks.push(newBook);
 		}
 		const books = await Book.create(arrOfBooks);
-		books.forEach(async (e) => {
-			e.authors.forEach(async (id) => {
-				await Author.findByIdAndUpdate(id, {books: [...books, e._id]});
+		books.forEach(async (book) => {
+			book.authors.forEach(async (authorId) => {
+				const author = await Author.findById(authorId);
+				author.books.push(book._id);
+				await author.save();
 			});
-			await Publisher.findByIdAndUpdate(e.publisher, {books: [...books, e._id]});
+			const publisher = await Publisher.findById(book.publisher);
+			publisher.books.push(book.id);
+			await publisher.save();
 		});
 	} catch (err) {
 		console.log(err);
 	}
 }
 
-function getRandomIds(idsArr, numOfReturns) {
-	try {
-		if (numOfReturns === 1) {
-			return idsArr[Math.floor(Math.random() * (idsArr.length - 1))];
-		}
-		const arr = [];
-		for (let i = 0; i < numOfReturns; i++) {
-			const r = idsArr[Math.floor(Math.random() * (idsArr.length - 1))];
-			if (arr.find((e) => e === r)) {
-				i--;
-			} else {
-				arr.push(r);
-			}
-		}
-		return arr;
-	} catch (err) {
-		console.log(err);
+let authorIndex = 0;
+function getAuthorsIds(idsArr, numOfReturns) {
+	const arr = [];
+	for (let i = 0; i < numOfReturns; i++) {
+		arr.push(idsArr[(i + authorIndex) % idsArr.length]);
 	}
+	authorIndex += numOfReturns;
+	return arr;
+}
+let publisherIndex = 0;
+function getPublisherIds(idsArr) {
+	const res = idsArr[publisherIndex % idsArr.length];
+	publisherIndex++;
+	return res;
 }

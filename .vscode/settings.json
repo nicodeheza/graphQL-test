@@ -12,6 +12,7 @@
 		"authors",
 		"genres",
 		"grphql",
+		"loaders",
 		"past",
 		"populate",
 		"publication",

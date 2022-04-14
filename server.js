@@ -2,12 +2,19 @@ import {ApolloServer} from "apollo-server";
 import typeDefs from "./grphql/typeDefs.js";
 import resolvers from "./grphql/resolvers.js";
 import createDb from "./mongo/createDb.js";
+import loaders from "./loaders/loaders.js";
 
 await createDb();
 
 const server = new ApolloServer({
 	typeDefs,
-	resolvers
+	resolvers,
+	context: async ({req}) => {
+		return {
+			booksLoader: loaders.booksLoader,
+			authorLoader: loaders.authorsLoader
+		};
+	}
 });
 
 server.listen().then(({url}) => {
