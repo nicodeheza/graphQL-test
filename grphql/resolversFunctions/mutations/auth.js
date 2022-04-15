@@ -1,6 +1,6 @@
-import User from "../../models/User.js";
+import User from "../../../models/User.js";
 import {AuthenticationError, UserInputError} from "apollo-server";
-import {createHashAndSalt, logInJWT, signAuthJWT} from "../../auth/auth.js";
+import {createHashAndSalt, logInJWT, signAuthJWT} from "../../../auth/auth.js";
 
 export const signUpFunc = async (parent, args, ctx) => {
 	try {

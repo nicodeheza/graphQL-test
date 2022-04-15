@@ -1,17 +1,14 @@
 import {
 	getAllAuthorsFunc,
 	getAuthorByIdFunc
-} from "../resolversFunctions/queris/authors.js";
+} from "./resolversFunctions/queris/authors.js";
 import {
 	getAllPublishersFunc,
 	getPublisherByIdFunc
-} from "../resolversFunctions/queris/publishers.js";
-import {getAllBooksFunc, getBookByIdFunc} from "../resolversFunctions/queris/books.js";
-import {
-	createNewBookFunc,
-	updateBookFunc
-} from "../resolversFunctions/mutations/books.js";
-import {logInFunc, signUpFunc} from "../resolversFunctions/mutations/auth.js";
+} from "./resolversFunctions/queris/publishers.js";
+import {getAllBooksFunc, getBookByIdFunc} from "./resolversFunctions/queris/books.js";
+import {createNewBookFunc, updateBookFunc} from "./resolversFunctions/mutations/books.js";
+import {logInFunc, signUpFunc} from "./resolversFunctions/mutations/auth.js";
 
 async function bookField(parent, _, ctx) {
 	return await ctx.booksLoader.loadMany(parent.books.map((o) => o.toString()));

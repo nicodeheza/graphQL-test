@@ -1,5 +1,5 @@
 import {AuthenticationError} from "apollo-server";
-import Author from "../../models/Author.js";
+import Author from "../../../models/Author.js";
 
 export const getAllAuthorsFunc = async (parent, args, ctx) => {
 	if (!ctx.user) throw new AuthenticationError("Forbidden");

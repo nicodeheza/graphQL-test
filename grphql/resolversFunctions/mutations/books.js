@@ -1,4 +1,4 @@
-import Book from "../../models/Book.js";
+import Book from "../../../models/Book.js";
 import {AuthenticationError, UserInputError} from "apollo-server";
 
 export const createNewBookFunc = async (parent, args, ctx) => {

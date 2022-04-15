@@ -1,4 +1,4 @@
-import Book from "../../models/Book.js";
+import Book from "../../../models/Book.js";
 
 export const getBookByIdFunc = async (parent, args, ctx) => {
 	try {
