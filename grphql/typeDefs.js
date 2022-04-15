@@ -2,7 +2,6 @@ import {gql} from "apollo-server";
 
 const typeDefs = gql`
 	type Query {
-		getHello: String
 		getAllAuthors: [Author]
 		getAuthorById(id: ID!): Author
 		getAllPublishers: [Publisher]
@@ -39,6 +38,8 @@ const typeDefs = gql`
 			authorsIds: [String]
 			publisherId: String
 		): Book
+		signUp(userName: String!, password: String!): String
+		logIn(userName: String!, password: String!): String
 	}
 	type Author {
 		_id: ID!
@@ -62,6 +63,11 @@ const typeDefs = gql`
 		publicationYear: Int
 		authors: [Author]
 		publisher: Publisher
+	}
+	type User {
+		_id: ID!
+		userName: String!
+		password: String!
 	}
 	enum Order {
 		ASC

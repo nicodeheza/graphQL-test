@@ -13,7 +13,8 @@ const server = new ApolloServer({
 		return {
 			booksLoader: loaders.booksLoader,
 			authorsLoader: loaders.authorsLoader,
-			publisherLoader: loaders.publishersLoader
+			publisherLoader: loaders.publishersLoader,
+			usersLoader: loaders.usersLoader
 		};
 	}
 });
