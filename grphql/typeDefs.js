@@ -19,27 +19,27 @@ const typeDefs = gql`
 			sortByYear: Order
 		): [Book]
 	}
-	# type Mutation {
-	# 	createNewBook(
-	# 		title: String!
-	# 		ISBN: String!
-	# 		synopsis: String!
-	# 		genres: [String]
-	# 		publicationYear: Int
-	# 		authors: [Author]
-	# 		publisher: Publisher
-	# 	): Book
-	# 	updateBook(
-	# 		_id: ID!
-	# 		title: String
-	# 		ISBN: String
-	# 		synopsis: String
-	# 		genres: [String]
-	# 		publicationYear: Int
-	# 		authors: [Author]
-	# 		publisher: Publisher
-	# 	): Book
-	# }
+	type Mutation {
+		createNewBook(
+			title: String!
+			ISBN: String!
+			synopsis: String
+			genres: [String]
+			publicationYear: Int
+			authorsIds: [String]!
+			publisherId: String!
+		): Book
+		updateBook(
+			_id: ID!
+			title: String
+			ISBN: String
+			synopsis: String
+			genres: [String]
+			publicationYear: Int
+			authorsIds: [String]
+			publisherId: String
+		): Book
+	}
 	type Author {
 		_id: ID!
 		firstName: String!
@@ -50,7 +50,7 @@ const typeDefs = gql`
 	type Publisher {
 		_id: ID!
 		name: String!
-		foundationYear: String
+		foundationYear: Int
 		books: [Book]
 	}
 	type Book {

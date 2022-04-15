@@ -1,5 +1,6 @@
 {
 	"cSpell.ignoreWords": [
+		"Cast",
 		"Fiction",
 		"Historical",
 		"ISBN",
@@ -10,6 +11,7 @@
 		"Science",
 		"apollo",
 		"authors",
+		"doesn't",
 		"genres",
 		"grphql",
 		"loaders",
@@ -17,6 +19,7 @@
 		"populate",
 		"publication",
 		"publisher",
-		"publishers"
+		"publishers",
+		"trying"
 	]
 }
