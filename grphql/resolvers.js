@@ -11,7 +11,8 @@ async function bookField(parent, _, ctx) {
 
 const resolvers = {
 	Query: {
-		getAllAuthors: async () => {
+		getAllAuthors: async (parent, args, ctx) => {
+			if (!ctx.user) throw new AuthenticationError("Forbidden");
 			try {
 				return await Author.find({});
 			} catch (err) {
@@ -19,6 +20,7 @@ const resolvers = {
 			}
 		},
 		getAuthorById: async (parent, args, ctx) => {
+			if (!ctx.user) throw new AuthenticationError("Forbidden");
 			try {
 				return await ctx.authorsLoader.load(args.id);
 			} catch (err) {
@@ -70,6 +72,7 @@ const resolvers = {
 	},
 	Mutation: {
 		createNewBook: async (parent, args, ctx) => {
+			if (!ctx.user) throw new AuthenticationError("Forbidden");
 			//Validate authors and publishers
 			try {
 				const authors = await ctx.authorsLoader.loadMany(args.authorsIds);
@@ -95,6 +98,7 @@ const resolvers = {
 			}
 		},
 		updateBook: async (parent, args, ctx) => {
+			if (!ctx.user) throw new AuthenticationError("Forbidden");
 			const book = await Book.findById(args._id);
 			if (!book) {
 				throw new UserInputError("The book you are trying to update doesn't exist");
@@ -159,8 +163,9 @@ const resolvers = {
 		},
 		logIn: async (parent, args, ctx) => {
 			try {
-				const user = await User.findOne({userName: args.userName});
-				if (!user) throw new AuthenticationError("Invalid user name");
+				const user = await ctx.usersLoader.load(args.userName);
+				console.log(user);
+
 				return await logInJWT(
 					user.password,
 					user.salt,
@@ -170,6 +175,7 @@ const resolvers = {
 				);
 			} catch (err) {
 				console.log(err);
+				throw new AuthenticationError("Invalid user name or password");
 			}
 		}
 	},
@@ -181,6 +187,7 @@ const resolvers = {
 	},
 	Book: {
 		authors: async (parent, args, ctx) => {
+			if (!ctx.user) return null;
 			return await ctx.authorsLoader.loadMany(parent.authors.map((o) => o.toString()));
 		},
 		publisher: async (parent, args, ctx) => {

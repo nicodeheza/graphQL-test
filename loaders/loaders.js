@@ -14,8 +14,8 @@ const loaders = {
 	publishersLoader: new DataLoader((ids) => {
 		return Publisher.find({_id: {$in: ids}});
 	}),
-	usersLoader: new DataLoader((ids) => {
-		return User.find({_id: {$in: ids}});
+	usersLoader: new DataLoader((userName) => {
+		return User.find({userName: {$in: userName}});
 	})
 };
 

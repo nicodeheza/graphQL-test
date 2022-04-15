@@ -44,9 +44,11 @@ export async function signAuthJWT(userName, id) {
 }
 
 export function verifyAuthJWT(token) {
-	try {
-		return jwt.verify(token, process.env.SECRET);
-	} catch (error) {
-		throw new AuthenticationError("You are not authenticated");
-	}
+	return new Promise((resolve, reject) => {
+		jwt.verify(token, process.env.SECRET, (err, user) => {
+			if (err) resolve(null);
+			if (user) resolve(user);
+			resolve(null);
+		});
+	});
 }
