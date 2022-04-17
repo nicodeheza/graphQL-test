@@ -5,17 +5,23 @@ import Publisher from "../models/Publisher.js";
 import User from "../models/User.js";
 
 const loaders = {
-	booksLoader: new DataLoader((ids) => {
-		return Book.find({_id: {$in: ids}});
+	booksLoader: new DataLoader(async (ids) => {
+		const books = await Book.find({_id: {$in: ids}});
+		return ids.map((id) => books.find((book) => book._id.toString() === id));
 	}),
-	authorsLoader: new DataLoader((ids) => {
-		return Author.find({_id: {$in: ids}});
+	authorsLoader: new DataLoader(async (ids) => {
+		const authors = await Author.find({_id: {$in: ids}});
+		return ids.map((id) => authors.find((author) => author._id.toString() === id));
 	}),
-	publishersLoader: new DataLoader((ids) => {
-		return Publisher.find({_id: {$in: ids}});
+	publishersLoader: new DataLoader(async (ids) => {
+		const publishers = await Publisher.find({_id: {$in: ids}});
+		return ids.map((id) =>
+			publishers.find((publisher) => publisher._id.toString() === id)
+		);
 	}),
-	usersLoader: new DataLoader((userName) => {
-		return User.find({userName: {$in: userName}});
+	usersLoader: new DataLoader(async (userNames) => {
+		const users = await User.find({userName: {$in: userNames}});
+		return userNames.map((userName) => users.find((user) => user.userName === userName));
 	})
 };
 

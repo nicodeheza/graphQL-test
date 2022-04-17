@@ -11,8 +11,8 @@ const typeDefs = gql`
 			limit: Int
 			offset: Int
 			title: String
-			author: String
-			publisher: String
+			authorId: ID
+			publisherId: ID
 			year: Int
 			sortByTitle: Order
 			sortByYear: Order
@@ -25,8 +25,8 @@ const typeDefs = gql`
 			synopsis: String
 			genres: [String]
 			publicationYear: Int
-			authorsIds: [String]!
-			publisherId: String!
+			authorsIds: [ID]!
+			publisherId: ID!
 		): Book
 		updateBook(
 			_id: ID!
@@ -35,8 +35,8 @@ const typeDefs = gql`
 			synopsis: String
 			genres: [String]
 			publicationYear: Int
-			authorsIds: [String]
-			publisherId: String
+			authorsIds: [ID]
+			publisherId: ID
 		): Book
 		signUp(userName: String!, password: String!): String
 		logIn(userName: String!, password: String!): String

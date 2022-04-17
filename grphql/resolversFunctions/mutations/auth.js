@@ -21,7 +21,6 @@ export const signUpFunc = async (parent, args, ctx) => {
 export const logInFunc = async (parent, args, ctx) => {
 	try {
 		const user = await ctx.usersLoader.load(args.userName);
-		console.log(user);
 
 		return await logInJWT(
 			user.password,

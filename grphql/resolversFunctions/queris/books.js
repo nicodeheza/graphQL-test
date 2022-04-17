@@ -1,4 +1,5 @@
 import Book from "../../../models/Book.js";
+import mongoose from "mongoose";
 
 export const getBookByIdFunc = async (parent, args, ctx) => {
 	try {
@@ -16,8 +17,9 @@ export const getAllBooksFunc = async (parent, args, ctx) => {
 		sortArr.push(["publicationYear", args.sortByYear === "ASC" ? 1 : -1]);
 	const filter = {};
 	if (args.title !== undefined) filter.title = args.title;
-	if (args.author !== undefined) filter.authors = args.author;
-	if (args.publisher !== undefined) filter.publisher = args.publisher;
+	if (args.authorId !== undefined)
+		filter.authors = mongoose.Types.ObjectId(args.authorId);
+	if (args.publisherId !== undefined) filter.publisher = args.publisherId;
 	if (args.year !== undefined) filter.publicationYear = args.year;
 	try {
 		return await Book.find(filter)
